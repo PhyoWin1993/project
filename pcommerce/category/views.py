@@ -1,10 +1,19 @@
-from django.shortcuts import render
-from django.http import HttpResponse
-# Create your views here.
+from django.shortcuts import render, redirect
+from .models import Product
 
-def home(request):
-    return render(request,"category/index.html",{"title":"HOME PAGE"})
 
-def about(request):
-    return render(request,"category/about.html",{"title":"ABOUT PAGE"})
+def all(request):
+    context = {
+        "title":"Home Page",
+        "products":Product.objects.all()
+        }
+    return render(request,"category/all.html",context)
 
+def create(request):
+    return render(request,"category/create.html")
+
+def edit(request):
+    return render(request,"category/edit.html")
+
+def delete(request):
+    return redirect("cat-home")
